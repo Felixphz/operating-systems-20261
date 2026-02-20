@@ -23,7 +23,7 @@ cd operating-systems-20261/laboratories/lab0/
 ```bash
 pwd > path.txt
 ```
-### Con un solo comando crear los directorios
+### Con un solo comando creamos los directorios
 
 ```bash
 mkdir example music photos projects
