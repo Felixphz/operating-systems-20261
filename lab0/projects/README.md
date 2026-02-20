@@ -1,7 +1,6 @@
 #  Lab 0 – Operating Systems 20261
 
-## 
-Aprender los conceptos y las herramientas básicas para mejorar su interacción con la terminal shell de linux (Bash o zsh)
+## Objetivo:Aprender los conceptos y las herramientas básicas para mejorar su interacción con la terminal shell de linux (Bash o zsh)
 ---
 
 ## Paso a Paso del Reto
