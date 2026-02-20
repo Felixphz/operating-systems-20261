@@ -44,7 +44,7 @@ se utiliza el comando rm file{1..9} file{79..100} para la eliminación parcial d
 ```bash
 for dir in example photos projects music; 
 do 
-rm "$dir"/file{1..9} "$dir"/file{81..100}; 
+rm "$dir"/file{1..10} "$dir"/file{81..100}
 done
 ```
 
@@ -55,5 +55,5 @@ mv example music photos projects/
 
 ### Eliminación de archivos en projects con modo verboso
 ```bash
-rm -v projects/file{10..80} > output.txt
+rm -v projects/file{11..80} > output.txt
 ```
