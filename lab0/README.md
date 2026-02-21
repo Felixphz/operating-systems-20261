@@ -57,3 +57,4 @@ mv example music photos projects/
 ```bash
 rm -v projects/file{11..80} > output.txt
 ```
+<img width="738" height="247" alt="image" src="https://github.com/user-attachments/assets/e2c28da1-a6ae-4543-abc1-eaca0efd98e8" />
