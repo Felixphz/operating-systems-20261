@@ -2,10 +2,10 @@
 #define TICKET_H
 
 typedef struct {
-    char *identificacion;
-    char *correo;
-    char *tipo;
-    char *radicado;
+    char *identificacion; /* Número de identificación del usuario        */
+    char *correo;         /* Correo electrónico de contacto              */
+    char *tipo;           /* Tipo o motivo de la reclamación             */
+    char *radicado;       /* Radicado generado (timestamp + aleatorio)   */
 } Ticket;
 
 Ticket* ticket_create(const char *id,

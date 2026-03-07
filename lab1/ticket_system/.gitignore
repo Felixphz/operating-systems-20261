@@ -1,0 +1,8 @@
+# Archivos objeto generados por la compilación
+*.o
+
+# Ejecutable compilado
+ticket_app
+
+# Tickets generados por el programa
+assets/ticket_*.txt
