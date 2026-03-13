@@ -230,3 +230,7 @@ Es muy probable que los procesos que desciendan a las colas de menor prioridad n
 Un quantum de tiempo pequeño en la cola de mayor prioridad permite obtener un tiempo de respuesta muy bajo, ya que los procesos, a medida que llegan al sistema, tienen una alta probabilidad de ser atendidos rápidamente por el procesador. Esto favorece especialmente a los procesos interactivos o de corta duración.
 
 Sin embargo, esta configuración también tiene un inconveniente: los procesos que utilizan completamente su quantum son demovidos rápidamente a colas de menor prioridad, lo que puede provocar que los procesos intensivos en CPU desciendan con rapidez en la jerarquía de colas y deban esperar más tiempo para volver a ejecutarse.  
+
+**¿Puede haber starvation si el priority boost es muy frecuente?**
+
+No es común que ocurra starvation en este caso. Debido a que el priority boost promueve periódicamente todos los procesos a la cola de mayor prioridad, incluso aquellos que estaban en colas inferiores reciben nuevas oportunidades de ejecución.
