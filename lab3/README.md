@@ -212,3 +212,21 @@ El simulador calcula automáticamente:
 - **Tiempo de Espera**: Tiempo total esperando en las colas
 
 Estas métricas permiten evaluar la eficiencia del planificador MLFQ.
+
+## Analisis de comportamiento 
+
+**¿Qué ocurre si el boost es muy frecuente?**
+
+Si el priority boost ocurre con demasiada frecuencia, los procesos son promovidos constantemente a la cola de mayor prioridad. Como consecuencia, los procesos no permanecen el tiempo suficiente en las colas inferiores para que el algoritmo pueda diferenciar entre procesos interactivos y procesos intensivos en CPU.
+
+En este escenario, la mayoría de los procesos tienden a acumularse en la cola de mayor prioridad y el comportamiento del scheduler se vuelve similar al de un Round Robin, reduciendo la efectividad del mecanismo de retroalimentación del algoritmo MLFQ.
+
+**¿Qué ocurre si no existe boost?**
+ 
+Es muy probable que los procesos que desciendan a las colas de menor prioridad no vuelvan a ejecutarse, especialmente si continúan llegando nuevos procesos al sistema que ocupan las colas de mayor prioridad. Como consecuencia, estos procesos pueden permanecer indefinidamente esperando por CPU, lo que provoca inanición (starvation) en el sistema.
+
+**¿Cómo afecta un quantum pequeño en la cola de mayor prioridad?**
+
+Un quantum de tiempo pequeño en la cola de mayor prioridad permite obtener un tiempo de respuesta muy bajo, ya que los procesos, a medida que llegan al sistema, tienen una alta probabilidad de ser atendidos rápidamente por el procesador. Esto favorece especialmente a los procesos interactivos o de corta duración.
+
+Sin embargo, esta configuración también tiene un inconveniente: los procesos que utilizan completamente su quantum son demovidos rápidamente a colas de menor prioridad, lo que puede provocar que los procesos intensivos en CPU desciendan con rapidez en la jerarquía de colas y deban esperar más tiempo para volver a ejecutarse.  

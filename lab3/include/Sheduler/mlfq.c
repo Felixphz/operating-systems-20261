@@ -3,10 +3,14 @@
 #include "Sheduler/queue.h"
 #include "utils/file_manager.h"
 
-#define Q0_QUANTUM 1
+#define Q0_QUANTUM 2
 #define Q1_QUANTUM 4
 #define Q2_QUANTUM 8
 
+/*
+ * Simula la ejecución de procesos con MLFQ usando tres colas de prioridad.
+ * Los procesos nuevos siempre entran a Q0 y descienden de nivel al agotar su quantum.
+ */
 void run_mlfq(Process processes[], int n, int boost_interval)
 {
 
@@ -21,8 +25,7 @@ void run_mlfq(Process processes[], int n, int boost_interval)
 
     while(completed < n)
     {
-
-        /* agregar procesos que llegan */
+        /* Los procesos que llegan en este instante entran a la cola de mayor prioridad. */
 
         for(int i=0;i<n;i++)
         {
@@ -32,7 +35,7 @@ void run_mlfq(Process processes[], int n, int boost_interval)
             }
         }
 
-        /* priority boost */
+        /* El boost evita inanicion: todos los procesos pendientes regresan a Q0. */
 
         if(time > 0 && time % boost_interval == 0)
         {
@@ -60,6 +63,7 @@ void run_mlfq(Process processes[], int n, int boost_interval)
         Queue *current_queue = NULL;
         int quantum = 0;
 
+        /* Siempre se ejecuta primero la cola de mayor prioridad no vacia. */
         if(!is_empty(&Q0))
         {
             current_queue = &Q0;
@@ -82,11 +86,13 @@ void run_mlfq(Process processes[], int n, int boost_interval)
         }
 
         Process *p = dequeue(current_queue);
-        
-        if(p == NULL) continue;  /* Verificación de seguridad */
+
+        /* Salvaguarda ante una cola inconsistente o un dequeue inesperado. */
+        if(p == NULL) continue;
 
         if(p->start_time == -1)
         {
+            /* La primera vez que corre define su tiempo de inicio y de respuesta. */
             p->start_time = time;
             p->first_response_time = time;
         }
@@ -100,7 +106,7 @@ void run_mlfq(Process processes[], int n, int boost_interval)
             time++;
             executed++;
 
-            /* verificar nuevas llegadas */
+            /* Las llegadas durante la ejecucion se insertan de inmediato en Q0. */
 
             for(int i=0;i<n;i++)
             {
@@ -122,6 +128,7 @@ void run_mlfq(Process processes[], int n, int boost_interval)
         {
             if(executed == quantum)
             {
+                /* Si agota su quantum, desciende de cola para ceder prioridad. */
                 if(p->current_queue == 0)
                 {
                     p->current_queue = 1;
@@ -139,11 +146,12 @@ void run_mlfq(Process processes[], int n, int boost_interval)
             }
             else
             {
+                /* Si fue interrumpido antes de agotar el quantum, conserva su nivel. */
                 enqueue(current_queue,p);
             }
         }
     }
 
-    /* Exportar resultados a CSV */
+    /* Exporta las metricas finales al terminar la simulacion completa. */
     export_results(processes, n, "mlfq_results.csv");
 }

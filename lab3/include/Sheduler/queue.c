@@ -3,9 +3,11 @@
 #include "Sheduler/queue.h"
 
 void init_queue(Queue *q)
-{
+{   /* posición del primer elemento*/
     q->front = 0;
+    /* posición donde se insertará el siguiente elemento */
     q->rear = 0;
+    /* cantidad de elementos actuales*/
     q->size = 0;
 }
 
