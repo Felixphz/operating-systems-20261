@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    image: docker.io/library/postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+  worker1:
+    build: ./worker
+    environment:
+      - WORKER_ID=worker1
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+      - ./shared:/shared
+
+  worker2:
+    build: ./worker
+    environment:
+      - WORKER_ID=worker2
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+      - ./shared:/shared
+
+  worker3:
+    build: ./worker
+    environment:
+      - WORKER_ID=worker3
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+      - ./shared:/shared
+
+  worker4:
+    build: ./worker
+    environment:
+      - WORKER_ID=worker4
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+      - ./shared:/shared
+
+  worker5:
+    build: ./worker
+    environment:
+      - WORKER_ID=worker5
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+      - ./shared:/shared

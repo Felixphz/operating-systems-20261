@@ -93,6 +93,7 @@ Ticket* ticket_create(const char *id,
  *
  * Retorna: 0 si el guardado fue exitoso, -1 si hubo un error de E/S.
  */
+ 
 int ticket_save(const Ticket *ticket) {
 
     char nombre[100];

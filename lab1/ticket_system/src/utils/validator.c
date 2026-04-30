@@ -28,7 +28,7 @@ int validate_not_empty(const char *str) {
  * Retorna: 1 si todos los caracteres son dígitos, 0 en caso contrario.
  */
 int validate_numeric(const char *str) {
-    if (!str || strlen(str) == 0) return 0;
+    if (!validate_not_empty(str)) return 0;
 
     for (int i = 0; str[i] != '\0'; i++) {
         /* isdigit requiere cast a unsigned char para evitar UB con caracteres
@@ -49,8 +49,8 @@ int validate_numeric(const char *str) {
  * Retorna: 1 si la cadena contiene '@', 0 en caso contrario.
  */
 int validate_email(const char *str) {
-    if (!str) return 0;
-
+    if (!validate_not_empty(str)) return 0;
+    
     /* strchr retorna NULL si '@' no se encuentra en la cadena */
     const char *at = strchr(str, '@');
     return at != NULL;
