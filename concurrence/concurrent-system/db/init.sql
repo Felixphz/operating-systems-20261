@@ -13,4 +13,4 @@ CREATE TABLE IF NOT EXISTS result (
 );
 
 INSERT INTO input (description)
-SELECT 'dato_' || generate_series(1, 100);
+SELECT 'dato_' || generate_series(1, 1000);
