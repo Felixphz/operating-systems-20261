@@ -20,7 +20,7 @@ El sistema está diseñado como un procesador de tareas distribuido utilizando u
 El trabajo se distribuye utilizando un **Modelo de Pull**. En lugar de un orquestrador central que envía tareas a los trabajadores, cada trabajador solicita activamente trabajo a la base de datos.
 
 - **Nivel de Contenedor**: Se inician 5 contenedores de trabajadores independientes.
-- **Nivel de Hilo**: Cada contenedor de trabajador genera 5 hilos internos.
+- **Nivel de Hilo**: Cada contenedor de trabajador genera 3 hilos internos.
 - **Ejecución**: Un hilo extrae una tarea, la procesa y confirma el resultado. Esto permite que el sistema escale horizontalmente (más contenedores) y verticalmente (más hilos por contenedor).
 
 ## 3. Prevención de Condiciones de Carrera
